@@ -1,0 +1,36 @@
+# Aim: To implement an efficient algorithm to find the length of the longest strictly increasing subsequence in a given array
+# Objective :
+ To understand and implement the concept of the Longest Increasing Subsequence (LIS) problem.
+ *  To apply binary search (lower_bound) for optimizing the solution to O(n log n) time complexity.
+ *  To demonstrate the usage of dynamic programming with a greedy approach for solving LIS.
+ * . To improve problem-solving skills related to subsequence problems in competitive programming.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int lengthOfLIS(vector<int>& nums) {
+    vector<int> sub;
+    for (int num : nums) {
+        auto it = lower_bound(sub.begin(), sub.end(), num);
+        if (it == sub.end()) {
+            sub.push_back(num);
+        } else {
+            *it = num;
+        }
+    }
+    return sub.size();
+}
+
+int main() {
+    vector<int> nums1 = {10,9,2,5,3,7,101,18};
+    vector<int> nums2 = {0,1,0,3,2,3};
+    vector<int> nums3 = {7,7,7,7,7,7,7};
+    
+    cout << lengthOfLIS(nums1) << endl; // Output: 4
+    cout << lengthOfLIS(nums2) << endl; // Output: 4
+    cout << lengthOfLIS(nums3) << endl; // Output: 1
+    
+    return 0;
+}
