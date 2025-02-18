@@ -1,0 +1,31 @@
+Aim: To implement an efficient algorithm to find the maximum product subarray in a given array.
+* Objective:
+ * 1. To understand and implement the concept of the Maximum Product Subarray problem.
+ * 2. To efficiently handle variations in product values due to negative numbers.
+ * 3. To demonstrate the use of dynamic programming and iterative updates for solving array-based problems.
+ * 4. To improve problem-solving skills related to contiguous subarray problems in competitive programming.
+ #include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+int maxProduct(vector<int>& nums) {
+    int maxProd = nums[0], minProd = nums[0], result = nums[0];
+    for (size_t i = 1; i < nums.size(); i++) {
+        if (nums[i] < 0) swap(maxProd, minProd);
+        maxProd = max(nums[i], maxProd * nums[i]);
+        minProd = min(nums[i], minProd * nums[i]);
+        result = max(result, maxProd);
+    }
+    return result;
+}
+
+int main() {
+    vector<int> nums1 = {2,3,-2,4};
+    vector<int> nums2 = {-2,0,-1};
+    
+    cout << maxProduct(nums1) << endl; // Output: 6
+    cout << maxProduct(nums2) << endl; // Output: 0
+    
+    return 0;
+}
